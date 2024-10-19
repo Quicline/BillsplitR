@@ -31,10 +31,13 @@ struct ContentView: View {
                     .pickerStyle(.menu)
                 }
                 
-                Section {
-                    Button("press") {
-                        print(numberOfPeople)
+                Section("Tip Percentage") {
+                    Picker("Tip Percentage", selection: $tipPercentage) {
+                        ForEach(tipPercentages, id: \.self) {
+                            Text($0, format: .percent)
+                        }
                     }
+                    .pickerStyle(.segmented)
                 }
                 
                 Section {
