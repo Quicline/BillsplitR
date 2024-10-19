@@ -16,17 +16,36 @@ struct ContentView: View {
     
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Bill Amount", value: $billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                    .keyboardType(.decimalPad)
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Bill Amount", value: $billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                        .keyboardType(.decimalPad)
+                    
+                    Picker("Number of people", selection: $numberOfPeople) {
+                        ForEach(2..<100) {
+                            Text("\($0) people")
+                        }
+                        
+                    }
+                    .pickerStyle(.menu)
+                }
+                
+                Section {
+                    Button("press") {
+                        print(numberOfPeople)
+                    }
+                }
+                
+                Section {
+                    Text(billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                }
             }
-            
-            Section {
-                Text(billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-            }
+            .navigationTitle("WeSplit")
         }
     }
+    
+
 }
 
 #Preview {
